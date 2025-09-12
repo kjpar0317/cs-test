@@ -101,7 +101,7 @@ const apiClient = {
 				},
 			});
 
-			return response.json() as T;
+			return response.json() as Promise<T>;
 		} catch (error: unknown) {
 			if (
 				error &&
@@ -121,19 +121,28 @@ const apiClient = {
 
 	// Convenience methods for common HTTP verbs
 	get<T = unknown>(endpoint: string, options = {}) {
-		return this.request("get", endpoint, options) as T;
+		return this.request("get", endpoint, options) as Promise<T>;
 	},
 	post<T = unknown>(endpoint: string, data: RequestBody, options = {}) {
-		return this.request("post", endpoint, { ...options, json: data }) as T;
+		return this.request("post", endpoint, {
+			...options,
+			json: data,
+		}) as Promise<T>;
 	},
 	put<T = unknown>(endpoint: string, data: RequestBody, options = {}) {
-		return this.request("put", endpoint, { ...options, json: data }) as T;
+		return this.request("put", endpoint, {
+			...options,
+			json: data,
+		}) as Promise<T>;
 	},
 	delete<T = unknown>(endpoint: string, options = {}) {
-		return this.request("delete", endpoint, options) as T;
+		return this.request("delete", endpoint, options) as Promise<T>;
 	},
 	patch<T = unknown>(endpoint: string, data: RequestBody, options = {}) {
-		return this.request("patch", endpoint, { ...options, json: data }) as T;
+		return this.request("patch", endpoint, {
+			...options,
+			json: data,
+		}) as Promise<T>;
 	},
 };
 
