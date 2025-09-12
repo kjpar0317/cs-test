@@ -1,7 +1,7 @@
 import type { KyInstance } from "ky";
 import ky from "ky";
 
-type T = Record<string, unknown>;
+type RequestBody = Record<string, unknown> | unknown | null | undefined;
 type HttpMethod = "get" | "post" | "put" | "delete" | "patch";
 
 // API Client configuration
@@ -64,7 +64,11 @@ const apiClient = {
 	},
 
 	// Main API request function with retry on token expiration
-	async request(method: HttpMethod, endpoint: string, options = {}) {
+	async request<T = unknown>(
+		method: HttpMethod,
+		endpoint: string,
+		options = {},
+	) {
 		try {
 			const response = await this.client[method](endpoint, {
 				...options,
@@ -96,7 +100,7 @@ const apiClient = {
 				},
 			});
 
-			return response.json();
+			return response.json() as T;
 		} catch (error: unknown) {
 			if (
 				error &&
@@ -115,24 +119,20 @@ const apiClient = {
 	},
 
 	// Convenience methods for common HTTP verbs
-	get(endpoint: string, options = {}) {
-		return this.request("get", endpoint, options);
+	get<T = unknown>(endpoint: string, options = {}) {
+		return this.request("get", endpoint, options) as T;
 	},
-
-	post(endpoint: string, data: T, options = {}) {
-		return this.request("post", endpoint, { ...options, json: data });
+	post<T = unknown>(endpoint: string, data: RequestBody, options = {}) {
+		return this.request("post", endpoint, { ...options, json: data }) as T;
 	},
-
-	put(endpoint: string, data: T, options = {}) {
-		return this.request("put", endpoint, { ...options, json: data });
+	put<T = unknown>(endpoint: string, data: RequestBody, options = {}) {
+		return this.request("put", endpoint, { ...options, json: data }) as T;
 	},
-
-	delete(endpoint: string, options = {}) {
-		return this.request("delete", endpoint, options);
+	delete<T = unknown>(endpoint: string, options = {}) {
+		return this.request("delete", endpoint, options) as T;
 	},
-
-	patch(endpoint: string, data: T, options = {}) {
-		return this.request("patch", endpoint, { ...options, json: data });
+	patch<T = unknown>(endpoint: string, data: RequestBody, options = {}) {
+		return this.request("patch", endpoint, { ...options, json: data }) as T;
 	},
 };
 
