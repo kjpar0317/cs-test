@@ -1,8 +1,12 @@
+import type { ErrorResponseType } from "@/types/global";
 import type { KyInstance } from "ky";
+
 import ky from "ky";
 
 type RequestBody = Record<string, unknown> | unknown | null | undefined;
 type HttpMethod = "get" | "post" | "put" | "delete" | "patch";
+
+const DEFAULT_API_RETRY_LIMIT = 3;
 
 // API Client configuration
 const apiClient = {
@@ -79,21 +83,18 @@ const apiClient = {
 				},
 				hooks: {
 					beforeRetry: [
-						async ({ request, error }) => {
-							// Only attempt token refresh on 401 error
-							if (
-								error &&
-								typeof error === "object" &&
-								"response" in error &&
-								"response" in error &&
-								error.response instanceof Response &&
-								error.response?.status === 401
-							) {
-								await this.refreshToken();
-								const newToken = this.getAccessToken();
-								if (newToken) {
-									request.headers.set("Authorization", `Bearer ${newToken}`);
-								}
+						async ({ request, error, retryCount }) => {
+							const customError = error as ErrorResponseType;
+							if (customError.status !== 401) return ky.stop; // status code가 401이 아닌 경우 retry를 중지합니다.
+
+							if (retryCount === DEFAULT_API_RETRY_LIMIT - 1) {
+								this.clearTokens(); // access token을 2번 가져와도 실패한다면, 토큰 만료 로그아웃 시킵니다.
+								return ky.stop;
+							}
+							await this.refreshToken();
+							const newToken = this.getAccessToken();
+							if (newToken) {
+								request.headers.set("Authorization", `Bearer ${newToken}`);
 							}
 						},
 					],
