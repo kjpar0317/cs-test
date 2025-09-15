@@ -106,6 +106,7 @@ const apiClient = {
 
 			return response.json() as Promise<T>;
 		} catch (error: unknown) {
+			console.error(error);
 			if (
 				error &&
 				typeof error === "object" &&
