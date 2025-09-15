@@ -4,6 +4,7 @@ import Backend from "i18next-http-backend";
 import { initReactI18next } from "react-i18next";
 
 import { SupportedLanguages } from "@/constants/common";
+import { setLanguage } from "@/store/languageStore";
 
 i18n
 	.use(Backend)
@@ -16,5 +17,9 @@ i18n
 		backend: { loadPath: "/locales/{{lng}}/{{ns}}.json" },
 		ns: ["layout", "dashboard"],
 	});
+
+i18n.on("languageChanged", (lng) => {
+	setLanguage(lng);
+});
 
 export default i18n;
