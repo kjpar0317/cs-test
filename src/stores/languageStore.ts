@@ -1,4 +1,4 @@
-import type { SupportedLanguages } from "@/constant/common";
+import type { SupportedLanguages } from "@/constants/common";
 
 import { Store } from "@tanstack/store";
 

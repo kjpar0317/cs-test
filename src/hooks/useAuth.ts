@@ -1,7 +1,7 @@
 // import { useNavigate } from "@tanstack/react-router";
 import apiClient from "@/utils/api-client";
 
-import { setIsAuthenticated } from "@/store/authStore";
+import { setIsAuthenticated } from "@/stores/authStore";
 
 export default function useAuth() {
 	function login(token: string) {

@@ -3,8 +3,8 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import Backend from "i18next-http-backend";
 import { initReactI18next } from "react-i18next";
 
-import { SupportedLanguages } from "@/constant/common";
-import { setLanguage } from "@/store/languageStore";
+import { SupportedLanguages } from "@/constants/common";
+import { setLanguage } from "@/stores/languageStore";
 
 i18n
 	.use(Backend)

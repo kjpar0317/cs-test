@@ -1,4 +1,4 @@
-import { getLanguage, setLanguage } from "@/store/languageStore";
+import { getLanguage, setLanguage } from "@/stores/languageStore";
 import { useTranslation } from "react-i18next";
 // import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 

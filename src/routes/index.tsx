@@ -1,6 +1,6 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 
-import { getIsAuthenticated } from "@/store/authStore"; // 또는 services/authService.ts
+import { getIsAuthenticated } from "@/stores/authStore"; // 또는 services/authService.ts
 
 import "@/i18n";
 
