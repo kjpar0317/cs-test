@@ -1,4 +1,4 @@
-import UnauthenticatedLayout from "@/components/layout/UnauthenticatedLayout";
+import UnauthenticatedLayout from "@/components/layouts/template/UnauthenticatedLayout";
 // src/routes/_unauthenticated.tsx
 import { createFileRoute } from "@tanstack/react-router";
 

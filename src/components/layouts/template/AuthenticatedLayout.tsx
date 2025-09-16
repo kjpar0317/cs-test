@@ -1,6 +1,6 @@
 import { Outlet } from "@tanstack/react-router";
 
-import Header from "./Header";
+import Header from "../common/Header";
 
 export default function UnauthenticatedLayout() {
 	return (

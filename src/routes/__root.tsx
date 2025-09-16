@@ -3,8 +3,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Outlet, createRootRoute } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 
-import GlobalLoadingOverlay from "@/components/layout/GlobalLoadingOverlay";
-import NotFoundPage from "@/components/layout/NotFoundPage";
+import NotFoundPage from "@/components/layouts/error/NotFoundPage";
 
 export const Route = createRootRoute({
 	notFoundComponent: NotFoundPage,
