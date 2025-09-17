@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { movieApi } from "@/features/dashboard/api/movieApi";
-import { movieKeys } from "../queryKeys";
+import { movieApi } from "@/features/dashboard/api/movie-api";
+import { movieKeys } from "../constants/query-keys";
 
 export default function useMovie() {
 	const { data: movieData, isLoading: isMovieLoading } = useQuery({
