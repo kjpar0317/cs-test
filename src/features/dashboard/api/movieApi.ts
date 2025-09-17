@@ -1,6 +1,6 @@
 import type { PopularMoviesResponse } from "../types/movie";
 
-import apiClient from "@/utils/api-client";
+import apiClient from "@/utils/apiClient";
 
 export const movieApi = {
 	getMovieList: async () => {
